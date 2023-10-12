@@ -38,15 +38,14 @@ public class InscricaoEstadualPAValidator {
 
 	public static String addMask(String inscricaoEstadualNoMask) throws Exception {
 		if (inscricaoEstadualNoMask.length() != 9) {
-			throw new Exception("Size Invalid"); // Tamanho inv�lido
+			throw new Exception("Size Invalid");
 		}
 
 		String parteUm = inscricaoEstadualNoMask.substring(0, 2);
-		String parteDois = inscricaoEstadualNoMask.substring(2, 5);
-		String parteTres = inscricaoEstadualNoMask.substring(5, 8);
+		String parteDois = inscricaoEstadualNoMask.substring(2, 8);
 		String digito = inscricaoEstadualNoMask.substring(inscricaoEstadualNoMask.length() - 1);
 
-		String inscricaoEstadualWithMask = String.format("%s.%s.%s-%s", parteUm, parteDois, parteTres, digito);
+		String inscricaoEstadualWithMask = String.format("%s-%s-%s", parteUm, parteDois, digito);
 
 		return inscricaoEstadualWithMask;
 	}
@@ -54,11 +53,12 @@ public class InscricaoEstadualPAValidator {
 	public static String generateDigit(String inscricaoEstadualNoDigit) throws Exception {
 
 		if (inscricaoEstadualNoDigit.length() != 8) {
-			throw new Exception("Size Invalid"); // Tamanho inv�lido
+			throw new Exception("Size Invalid");
 		}
 
 		int[] weights = { 9, 8, 7, 6, 5, 4, 3, 2 };
 		int sum = 0;
+
 		for (int i = 0; i < inscricaoEstadualNoDigit.length(); i++) {
 			int digit = Character.getNumericValue(inscricaoEstadualNoDigit.charAt(i));
 			sum += digit * weights[i];
@@ -66,13 +66,14 @@ public class InscricaoEstadualPAValidator {
 
 		int remainder = sum % 11;
 		int verifierDigit;
+
 		if (remainder <= 1) {
 			verifierDigit = 0;
 		} else {
 			verifierDigit = 11 - remainder;
 		}
-		String inscricaoEstadualWithDigit = inscricaoEstadualNoDigit.concat(String.valueOf(verifierDigit));
-		return inscricaoEstadualWithDigit;
+
+		return inscricaoEstadualNoDigit.concat(String.valueOf(verifierDigit));
 	}
 
 }

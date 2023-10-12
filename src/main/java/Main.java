@@ -11,13 +11,16 @@ import validador.InscricaoEstadualMAValidator;
 import validador.InscricaoEstadualMSValidator;
 import validador.InscricaoEstadualMTValidator;
 import validador.InscricaoEstadualPAValidator;
+import validador.InscricaoEstadualPBValidator;
+import validador.InscricaoEstadualPIValidator;
+import validador.InscricaoEstadualRJValidator;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try {
-			String estado = "PA";
-			String inscricaoEstadual = "15-999999-5";
+			String estado = "RJ";
+			String inscricaoEstadual = "9999999";
 
 			switch (Estados.find(estado)) {
 				case ACRE:
@@ -69,23 +72,34 @@ public class Main {
 					InscricaoEstadualMSValidator
 							.isValidInscricaoEstadualMS(InscricaoEstadualMSValidator.generateDigit(inscricaoEstadual));
 					break;
-				// Fazer depois
 				case MINAS_GERAIS:
+					// Fazer depois
 					break;
 				case PARA:
-					InscricaoEstadualPAValidator.isValidInscricaoEstadualPA(inscricaoEstadual);
+					InscricaoEstadualPAValidator.isValidInscricaoEstadualPA(
+							InscricaoEstadualPAValidator.addMask(InscricaoEstadualPAValidator.generateDigit(inscricaoEstadual)));
 					break;
 				case PARAIBA:
+					InscricaoEstadualPBValidator
+							.isValidInscricaoEstadualPB(
+									InscricaoEstadualPBValidator.addMask(InscricaoEstadualPBValidator.generateDigit(inscricaoEstadual)));
 					break;
 				case PARANA:
+					// Fazer depois
 					break;
 				case PERNAMBUCO:
+					// fazer depois pra caralho
 					break;
 				case PIAUI:
+					InscricaoEstadualPIValidator.isValidInscricaoEstadualPI(
+							InscricaoEstadualPIValidator.addMask(InscricaoEstadualPIValidator.generateDigit(inscricaoEstadual)));
 					break;
 				case RIO_DE_JANEIRO:
+					InscricaoEstadualRJValidator.isValidInscricaoEstadualRJ(
+							InscricaoEstadualRJValidator.addMask(InscricaoEstadualRJValidator.generateDigit(inscricaoEstadual)));
 					break;
 				case RIO_GRANDE_DO_NORTE:
+				//Fazer depois
 					break;
 				case RIO_GRANDE_DO_SUL:
 					break;
